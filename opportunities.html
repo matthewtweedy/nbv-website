@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Opportunities — Nebraska Boys Volleyball</title>
+  <meta name="description" content="Find volleyball clinics, open gyms, camps, and jamboree events for boys across Nebraska.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================
+       NBV SITE — opportunities.html
+       Brand colors:
+         Primary red:   #C0392B
+         Light red:     #E57373
+         Dark bg:       #111111
+         Dark surface:  #1a1a1a
+         Dark border:   #2a2a2a
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.6; color: #1a1a1a; background: #fff; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px; border-bottom: 1px solid #e8e8e4;
+      background: #fff; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { text-decoration: none; }
+    .nav-logo img { height: 68px; width: auto; display: block; mix-blend-mode: multiply; }
+    .nav-logo-text { display: none; font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: #1a1a1a; text-decoration: none; }
+    .nav-logo-text span { color: #C0392B; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: #555; text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: #1a1a1a; }
+    .nav-links a.active { color: #C0392B; }
+    .nav-cta {
+      background: #C0392B; color: #fff; border: none; border-radius: 6px;
+      padding: 9px 18px; font-size: 14px; font-weight: 600;
+      font-family: 'Barlow', sans-serif; cursor: pointer;
+      text-decoration: none; display: inline-block; transition: background 0.15s;
+    }
+    .nav-cta:hover { background: #a93226; }
+
+    .page-hero { background: #111; padding: 48px 32px 40px; }
+    .page-hero-inner { max-width: 640px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; color: #E57373; text-transform: uppercase; margin-bottom: 12px; }
+    .page-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 800; line-height: 1.05; color: #fff; margin-bottom: 12px; }
+    .page-hero h1 em { color: #E57373; font-style: normal; }
+    .page-hero p { font-size: 15px; color: #888; line-height: 1.6; max-width: 520px; }
+
+    .section { padding: 48px 32px; }
+    .section-alt { background: #f8f8f5; }
+    .section-dark { background: #111; }
+    .section-narrow { max-width: 860px; margin: 0 auto; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 4px; color: #1a1a1a; }
+    .section-title-light { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 4px; color: #fff; }
+    .section-sub { font-size: 13px; color: #888; margin-bottom: 20px; line-height: 1.5; }
+    .section-sub-light { font-size: 13px; color: #666; margin-bottom: 20px; line-height: 1.5; }
+
+    /* ── Calendar responsive ── */
+    .cal-desktop { display: block; }
+    .cal-mobile  { display: none; }
+
+    /* ── Calendar placeholder (keep for reference) ── */
+    .calendar-placeholder {
+      height: 560px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      color: #bbb; font-size: 14px; background: #fafaf8;
+      border: 2px dashed #ddd; border-radius: 10px; padding: 24px; text-align: center;
+    }
+    .calendar-placeholder strong { color: #666; font-size: 15px; display: block; margin-bottom: 4px; }
+
+    /* ── Event list ── */
+    .event-list { display: flex; flex-direction: column; gap: 12px; }
+    .event-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 16px 20px;
+    }
+    .event-date {
+      background: #fdf0ef; border-radius: 8px; padding: 8px 12px;
+      text-align: center; min-width: 58px; flex-shrink: 0;
+    }
+    .event-date-mon { font-size: 10px; font-weight: 700; color: #C0392B; text-transform: uppercase; letter-spacing: 1px; }
+    .event-date-day { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 800; color: #7b1a11; line-height: 1; }
+    .event-info-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+    .event-info-meta { font-size: 13px; color: #777; }
+    .badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px; margin-left: 8px;
+      vertical-align: middle; letter-spacing: 0.3px;
+    }
+    .badge-nbv { background: #fdf0ef; color: #a93226; }
+    .badge-ext { background: #f0f0eb; color: #666; }
+
+    .btn-primary {
+      background: #C0392B; color: #fff; border: none; border-radius: 7px;
+      padding: 11px 22px; font-size: 14px; font-weight: 600;
+      font-family: 'Barlow', sans-serif; cursor: pointer;
+      text-decoration: none; display: inline-block; transition: background 0.15s; white-space: nowrap;
+    }
+    .btn-primary:hover { background: #a93226; }
+
+    .cta-strip {
+      background: #fdf0ef; border-radius: 12px; padding: 24px 28px; margin-top: 32px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .cta-strip-text { font-size: 15px; font-weight: 500; color: #7b1a11; }
+    .cta-strip-sub { font-size: 13px; color: #C0392B; margin-top: 2px; }
+
+    /* ── Flyer gallery ── */
+    .flyer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .flyer-card {
+      cursor: pointer;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+      transition: transform 0.15s, border-color 0.15s;
+      background: #1a1a1a;
+    }
+    .flyer-card:hover { transform: translateY(-3px); border-color: #C0392B; }
+    .flyer-card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+    .flyer-card-label {
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #aaa;
+      line-height: 1.3;
+    }
+    .flyer-card-label span {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 640px;
+      width: 100%;
+    }
+    .lightbox-inner img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      max-height: 88vh;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 36px;
+      height: 36px;
+      background: #C0392B;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow', sans-serif;
+    }
+    .lightbox-caption {
+      text-align: center;
+      color: #aaa;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #f4f4f0; border-top: 1px solid #e8e8e4;
+      padding: 24px 32px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800; color: #1a1a1a; }
+    .footer-logo span { color: #C0392B; }
+    .footer-meta { font-size: 12px; color: #888; }
+    .footer-meta a { color: #C0392B; text-decoration: none; }
+
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e4;
+    padding: 8px 0 16px;
+    position: sticky;
+    top: 85px;
+    z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 15px;
+      font-weight: 500;
+      color: #555;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-bottom: 1px solid #f4f4f0;
+      transition: color 0.15s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #1a1a1a; }
+    .mobile-menu a.active { color: #C0392B; }
+    .mobile-menu .mobile-cta {
+      margin: 12px 20px 0;
+      background: #C0392B;
+      color: #fff;
+      border-radius: 6px;
+      padding: 11px 18px;
+      font-weight: 600;
+      text-align: center;
+      border-bottom: none;
+    }
+    .mobile-menu .mobile-cta:hover { background: #a93226; color: #fff; }
+
+    @media (max-width: 600px) {
+      nav { padding: 12px 16px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .page-hero { padding: 36px 20px 28px; }
+      .page-hero h1 { font-size: 34px; }
+      .section { padding: 36px 20px; }
+      .cta-strip { flex-direction: column; align-items: flex-start; }
+      .flyer-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 20px 16px; }
+      .cal-desktop { display: none; }
+      .cal-mobile  { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Nebraska Boys Volleyball"
+           onerror="this.style.display='none'; document.querySelector('.nav-logo-text').style.display='block'">
+      <span class="nav-logo-text">Nebraska <span>Boys</span> Volleyball</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="opportunities.html" class="active">VB opportunities</a></li>
+      <li><a href="about.html">Get involved</a></li>
+    </ul>
+    <a href="https://forms.gle/QvEPisLkVAaxbDYGA" class="nav-cta" target="_blank" rel="noopener">Get involved</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="opportunities.html" class="active">VB opportunities</a>
+    <a href="about.html">Get involved</a>
+    <a href="https://forms.gle/QvEPisLkVAaxbDYGA" class="mobile-cta" target="_blank" rel="noopener">Get involved</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="hero-eyebrow">VB Opportunities</div>
+      <h1>Find your next<br><em>chance to play.</em></h1>
+      <p>Third-party events are listed as a community service. We are helping spread the word and share opportunities for boys’ volleyball across Nebraska.</p>
+    </div>
+  </section>
+
+  <!-- ── Calendar ── -->
+  <section class="section section-alt">
+    <div class="section-narrow">
+      <div class="section-title">All opportunities — calendar view</div>
+      <p class="section-sub">All NBV clinics, jamborees, and community events in one place. Click any event for details.</p>
+
+      <!-- ════════════════════════════════════════════════════
+           PASTE YOUR GOOGLE CALENDAR EMBED CODE HERE.
+           Steps:
+           1. Go to calendar.google.com
+           2. Click ⋮ next to your calendar name → Settings and sharing
+           3. Scroll down to "Integrate calendar"
+           4. Copy the iframe embed code
+           5. Paste it below, replacing the placeholder div
+           6. Set width="100%" and height="600" on the iframe tag
+           ════════════════════════════════════════════════════ -->
+
+      <!-- Desktop: full month calendar (hidden on mobile) -->
+      <div class="cal-desktop">
+        <iframe src="https://calendar.google.com/calendar/embed?src=baab201ef44ffde9aba1c2c35383f0565a7fe5b9fc8230446f8d9ffed6333a62%40group.calendar.google.com&ctz=America%2FChicago" style="border:0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+
+      <!-- Mobile: agenda/list view (hidden on desktop) -->
+      <div class="cal-mobile">
+        <iframe src="https://calendar.google.com/calendar/embed?src=baab201ef44ffde9aba1c2c35383f0565a7fe5b9fc8230446f8d9ffed6333a62%40group.calendar.google.com&ctz=America%2FChicago&mode=AGENDA" style="border:0" width="100%" height="480" frameborder="0" scrolling="no"></iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Event list ── -->
+  <section class="section">
+    <div class="section-narrow">
+      <div class="section-title">Upcoming events</div>
+      
+
+      <div class="cta-strip">
+        <div>
+          <div class="cta-strip-text">Want to add an event?</div>
+          <div class="cta-strip-sub">Send us the details and we'll get it listed.</div>
+        </div>
+        <a href="mailto:info@neboysvb.org" class="btn-primary">Email us</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Flyer gallery ── -->
+  <section class="section section-dark">
+    <div class="section-narrow">
+      <div class="section-title-light">Event flyers</div>
+      <p class="section-sub-light">Click any flyer to view full size.</p>
+
+      <div class="flyer-grid">
+
+        <!-- ══════════════════════════════════════════════════
+             HOW TO ADD A NEW FLYER:
+
+             1. Create a folder called "flyers" in your repo
+                (same level as index.html)
+             2. Drop your flyer image in there
+                (JPG or PNG, named something like uno-camp.jpg)
+             3. Copy one flyer-card block below and paste it
+             4. Update src="flyers/YOUR-FILE-NAME.jpg"
+             5. Update the label text and date
+
+             That's it — save, commit, push.
+        ══════════════════════════════════════════════════ -->
+
+        <div class="flyer-card" onclick="openLightbox('flyers/uno-summer-camp.png', 'UNO Maverick Boys Camp · June 18')">
+          <img src="flyers/uno-summer-camp.png" alt="UNO Maverick Boys Camp flyer"
+               onerror="this.src=''; this.parentElement.style.display='none'">
+          <div class="flyer-card-label">
+            UNO Maverick Boys Camp
+            <span>June 18 · Omaha</span>
+          </div>
+        </div>
+
+        <div class="flyer-card" onclick="openLightbox('flyers/out-of-system.png', 'Out of System VB · June 25')">
+          <img src="flyers/out-of-system.png" alt="Out of System VB flyer"
+               onerror="this.src=''; this.parentElement.style.display='none'">
+          <div class="flyer-card-label">
+            Out of System VB
+            <span>June 25 · Great Plains Regional</span>
+          </div>
+        </div>
+
+        <div class="flyer-card" onclick="openLightbox('flyers/grass-tourney.png', 'Grass Tournament · May 17')">
+          <img src="flyers/grass-tourney.png" alt="Grass Tournament flyer"
+               onerror="this.src=''; this.parentElement.style.display='none'">
+          <div class="flyer-card-label">
+            Grass Tournament
+            <span>May 17</span>
+          </div>
+        </div>
+
+        <div class="flyer-card" onclick="openLightbox('flyers/envy-open-gym.png', 'Envy Volleyball Open Gym · Starting May 2')">
+          <img src="flyers/envy-open-gym.png" alt="Envy Volleyball Open Gym flyer"
+               onerror="this.src=''; this.parentElement.style.display='none'">
+          <div class="flyer-card-label">
+            Envy Volleyball Open Gym
+            <span>Starting May 2</span>
+          </div>
+        </div>
+
+        <div class="flyer-card" onclick="openLightbox('flyers/banzai-open-gym.png', 'Banzai Open Gym · Wednesdays 6–8pm')">
+          <img src="flyers/banzai-open-gym.png" alt="Banzai Open Gym flyer"
+               onerror="this.src=''; this.parentElement.style.display='none'">
+          <div class="flyer-card-label">
+            Banzai Open Gym
+            <span>Wednesdays 6–8pm · Starting May 13</span>
+          </div>
+        </div>
+
+        <div class="flyer-card" onclick="openLightbox('flyers/supernovas-clinic.png', 'Supernovas High Flyers Clinic · May 14')">
+          <img src="flyers/supernovas-clinic.png" alt="Supernovas High Flyers Clinic flyer"
+               onerror="this.src=''; this.parentElement.style.display='none'">
+          <div class="flyer-card-label">
+            Supernovas High Flyers Clinic
+            <span>May 14</span>
+          </div>
+        </div>
+
+        <div class="flyer-card" onclick="openLightbox('flyers/4v4-rotating-pairs.png', '4v4 Rotating Pairs · Bellevue University')">
+          <img src="flyers/4v4-rotating-pairs.png" alt="4v4 Rotating Pairs flyer"
+               onerror="this.src=''; this.parentElement.style.display='none'">
+          <div class="flyer-card-label">
+            4v4 Rotating Pairs
+            <span>Bellevue University</span>
+          </div>
+        </div>
+
+        <div class="flyer-card" onclick="openLightbox('flyers/river-city-open-gym.png', 'River City Open Gym · Fridays 5–7pm')">
+          <img src="flyers/river-city-open-gym.png" alt="River City Open Gym flyer"
+               onerror="this.src=''; this.parentElement.style.display='none'">
+          <div class="flyer-card-label">
+            River City Open Gym
+            <span>Fridays 5–7pm · Starting June 5</span>
+          </div>
+        </div>
+
+        <!-- COPY A BLOCK ABOVE HERE TO ADD MORE FLYERS -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Lightbox overlay ── -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Nebraska <span>Boys</span> Volleyball</div>
+    <div class="footer-meta">
+      Nebraska Volleyball Development Association &middot; 501(c)(3) nonprofit &middot;
+      <a href="mailto:info@nebraskavolleyballdevelopment.org">info@nebraskavolleyballdevelopment.org</a>
+    </div>
+  </footer>
+
+  <script>
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+      if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lightbox-close')) return;
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>

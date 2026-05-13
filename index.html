@@ -1,37 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nebraska Volleyball Development Association</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            color: #222;
-        }
-        h1 { color: #003087; }
-        h2 { color: #003087; }
-        a { color: #003087; }
-        nav { margin-bottom: 30px; }
-        nav a { margin-right: 20px; text-decoration: none; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebraska Boys Volleyball — Growing the game, one gym at a time.</title>
+  <meta name="description" content="Free clinics, open gyms, and jamboree events for boys across Nebraska. No tryouts, no rosters, no experience required.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================
+       NBV SITE — index.html
+       Brand colors:
+         Primary red:   #C0392B  (buttons, borders, dots)
+         Light red:     #E57373  (eyebrow text, hero em, stat numbers)
+         Dark bg:       #111111  (hero, mission)
+         Dark surface:  #1a1a1a  (stat bar)
+         Dark border:   #2a2a2a  (stat bar dividers)
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.6; color: #1a1a1a; background: #fff; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 32px; border-bottom: 1px solid #e8e8e4;
+      background: #fff; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-logo-text {
+      display: none; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px; font-weight: 800; color: #1a1a1a; text-decoration: none;
+    }
+    .nav-logo-text span { color: #C0392B; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: #555; text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: #1a1a1a; }
+    .nav-links a.active { color: #C0392B; }
+    .nav-cta {
+      background: #C0392B; color: #fff; border: none; border-radius: 6px;
+      padding: 9px 18px; font-size: 14px; font-weight: 600;
+      font-family: 'Barlow', sans-serif; cursor: pointer;
+      text-decoration: none; display: inline-block; transition: background 0.15s;
+    }
+    .nav-cta:hover { background: #a93226; }
+
+    .hero { background: #111; padding: 72px 32px 56px; position: relative; overflow: hidden; }
+    .hero-inner { max-width: 640px; position: relative; z-index: 2; }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; color: #E57373; text-transform: uppercase; margin-bottom: 14px; }
+    .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 64px; font-weight: 800; line-height: 1.0; color: #fff; margin-bottom: 18px; }
+    .hero h1 em { color: #E57373; font-style: normal; }
+    .hero-sub { font-size: 17px; color: #888; line-height: 1.65; max-width: 520px; margin-bottom: 30px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-deco {
+      position: absolute; right: -16px; top: 0;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 180px;
+      font-weight: 800; color: #1e1e1e; line-height: 1;
+      pointer-events: none; user-select: none; z-index: 1;
+    }
+
+    .btn-primary {
+      background: #C0392B; color: #fff; border: none; border-radius: 7px;
+      padding: 13px 26px; font-size: 15px; font-weight: 600;
+      font-family: 'Barlow', sans-serif; cursor: pointer;
+      text-decoration: none; display: inline-block; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #a93226; }
+    .btn-ghost {
+      background: transparent; color: #888; border: 1.5px solid #333;
+      border-radius: 7px; padding: 13px 26px; font-size: 15px; font-weight: 600;
+      font-family: 'Barlow', sans-serif; cursor: pointer;
+      text-decoration: none; display: inline-block; transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-ghost:hover { border-color: #555; color: #ccc; }
+
+    .stat-bar { display: grid; grid-template-columns: repeat(3, 1fr); background: #1a1a1a; }
+    .stat { padding: 20px 24px; text-align: center; border-right: 1px solid #2a2a2a; }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 800; color: #E57373; line-height: 1; }
+    .stat-label { font-size: 12px; color: #555; margin-top: 4px; }
+
+    .section { padding: 56px 32px; }
+    .section-narrow { max-width: 800px; margin: 0 auto; }
+    .section-alt { background: #f8f8f5; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 800; margin-bottom: 6px; color: #1a1a1a; }
+    .section-sub { font-size: 14px; color: #888; margin-bottom: 28px; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .card { background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 22px; }
+    .card-dot { width: 8px; height: 8px; background: #C0392B; border-radius: 50%; margin-bottom: 12px; }
+    .card-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .card-text { font-size: 13px; color: #777; line-height: 1.55; }
+
+    .mission { background: #111; padding: 56px 32px; }
+    .mission-inner { max-width: 640px; }
+    .mission-title { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+    .mission-text { font-size: 16px; color: #888; line-height: 1.7; margin-bottom: 24px; }
+    .mission-text em { color: #E57373; font-style: normal; }
+
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .info-card { background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 22px; border-top: 3px solid #C0392B; }
+    .info-card-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .info-card-text { font-size: 13px; color: #777; line-height: 1.55; }
+
+    .social-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+    .social-pill {
+      display: flex; align-items: center; gap: 7px;
+      background: #f0f0eb; border: 1px solid #e0e0da; border-radius: 24px;
+      padding: 7px 16px; font-size: 13px; color: #444;
+      text-decoration: none; transition: background 0.15s;
+    }
+    .social-pill:hover { background: #e4e4de; }
+
+    footer {
+      background: #f4f4f0; border-top: 1px solid #e8e8e4;
+      padding: 24px 32px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800; color: #1a1a1a; }
+    .footer-logo span { color: #C0392B; }
+    .footer-meta { font-size: 12px; color: #888; }
+    .footer-meta a { color: #C0392B; text-decoration: none; }
+
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e4;
+    padding: 8px 0 16px;
+    position: sticky;
+    top: 85px;
+    z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 15px;
+      font-weight: 500;
+      color: #555;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-bottom: 1px solid #f4f4f0;
+      transition: color 0.15s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #1a1a1a; }
+    .mobile-menu a.active { color: #C0392B; }
+    .mobile-menu .mobile-cta {
+      margin: 12px 20px 0;
+      background: #C0392B;
+      color: #fff;
+      border-radius: 6px;
+      padding: 11px 18px;
+      font-weight: 600;
+      text-align: center;
+      border-bottom: none;
+    }
+    .mobile-menu .mobile-cta:hover { background: #a93226; color: #fff; }
+
+    @media (max-width: 600px) {
+      nav { padding: 12px 16px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 48px 20px 40px; }
+      .hero h1 { font-size: 44px; }
+      .hero-deco { font-size: 110px; }
+      .section { padding: 40px 20px; }
+      .stat-bar { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid #2a2a2a; }
+      .stat:last-child { border-bottom: none; }
+      footer { flex-direction: column; align-items: flex-start; padding: 20px 16px; }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-    </nav>
 
-    <h1>Nebraska Volleyball Development Association</h1>
-    <h2>Growing boys volleyball across Nebraska: one gym at a time.</h2>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Nebraska Boys Volleyball"
+           onerror="this.style.display='none'; document.querySelector('.nav-logo-text').style.display='block'">
+      <span class="nav-logo-text">Nebraska <span>Boys</span> Volleyball</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="opportunities.html">VB opportunities</a></li>
+      <li><a href="about.html">Get involved</a></li>
+    </ul>
+    <a href="https://forms.gle/QvEPisLkVAaxbDYGA" class="nav-cta" target="_blank" rel="noopener">Get involved</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" class="active">Home</a>
+    <a href="opportunities.html">VB opportunities</a>
+    <a href="about.html">Get involved</a>
+    <a href="https://forms.gle/QvEPisLkVAaxbDYGA" class="mobile-cta" target="_blank" rel="noopener">Get involved</a>
+  </div>
 
-    <p>Nebraska Volleyball Development Association (NBV) is a Nebraska nonprofit dedicated to expanding access to boys volleyball statewide. We run a traveling clinic series, open gyms, and jamboree showcase events for youth players of all skill levels — with a focus on beginners and underserved communities.</p>
+  <section class="hero">
+    <div class="hero-deco" aria-hidden="true">NBV</div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Nebraska Boys Volleyball &middot; Est. 2025</div>
+      <h1>Every boy deserves<br>an <em>invitation</em><br>to play.</h1>
+      <p class="hero-sub">Free clinics, open gyms, and jamboree events across Nebraska — no tryouts, no rosters, no experience required.</p>
+      <div class="hero-btns">
+        <a href="opportunities.html" class="btn-primary">Find an event near you</a>
+        <a href="about.html" class="btn-ghost">Support the mission</a>
+      </div>
+    </div>
+  </section>
 
-    <p>No tryouts, no rosters, no experience required.</p>
+  <div class="stat-bar">
+    <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Cities on the circuit</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Jamborees per year</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Programs for all ages</div></div>
+  </div>
 
-    <p>Contact: <a href="mailto:info@nebraskavolleyballdevelopment.org">info@nebraskavolleyballdevelopment.org</a></p>
+  <section class="section">
+    <div class="section-narrow">
+      <div class="section-title">How it works</div>
+      <p class="section-sub">Show up. Play. That's it.</p>
+      <div class="card-grid">
+        <div class="card"><div class="card-dot"></div><div class="card-title">Rotating clinics</div><div class="card-text">Weekly sessions cycle through Omaha, Lincoln, Columbus, Kearney, and more on a four-week schedule.</div></div>
+        <div class="card"><div class="card-dot"></div><div class="card-title">No roster required</div><div class="card-text">Teams form on the day from whoever shows up — colored pinnies, no politics, no commitment.</div></div>
+        <div class="card"><div class="card-dot"></div><div class="card-title">Jamboree showcases</div><div class="card-text">Six biannual events bring the statewide community together for a full day of competitive play.</div></div>
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="mission-inner">
+      <div class="mission-title">Why we exist</div>
+      <p class="mission-text">A parent once pointed out a kid who had almost gone to a party instead of staying for an open gym. He found his place in volleyball that night. We drove home asking: how many Nebraska boys never even get that <em>invitation</em>?</p>
+      <p class="mission-text">NBV exists to make sure they do. We're an independent nonprofit — no club affiliation, no fees, no barriers. Just volleyball, open to everyone.</p>
+      <a href="about.html" class="btn-primary">Join the mission</a>
+    </div>
+  </section>
+
+ 
+
+  <section class="section">
+    <div class="section-narrow">
+      <div class="section-title">Stay connected</div>
+      <p class="section-sub">Follow along as the program grows across Nebraska.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/NEBoysVolleyball" class="social-pill" target="_blank" rel="noopener">📸 @NEBoysVolleyball</a>
+        <a href="https://www.facebook.com/profile.php?id=61557560480954" class="social-pill" target="_blank" rel="noopener">👍 Nebraska Boys VB</a>
+        <a href="mailto:info@neboysvb.org" class="social-pill">✉️ info@neboysvb.org</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Nebraska <span>Boys</span> Volleyball</div>
+    <div class="footer-meta">
+      Nebraska Volleyball Development Association &middot; 501(c)(3) nonprofit &middot;
+      <a href="mailto:info@nebraskavolleyballdevelopment.org">info@nebraskavolleyballdevelopment.org</a>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
 </body>
 </html>

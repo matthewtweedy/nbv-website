@@ -1,38 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Nebraska Volleyball Development Association</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            color: #222;
-        }
-        h1 { color: #003087; }
-        a { color: #003087; }
-        nav { margin-bottom: 30px; }
-        nav a { margin-right: 20px; text-decoration: none; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Involved — Nebraska Boys Volleyball</title>
+  <meta name="description" content="Support Nebraska Boys Volleyball. Sponsor an event, volunteer, donate equipment, or join as a founding supporter.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================
+       NBV SITE — about.html
+       Brand colors:
+         Primary red:   #C0392B
+         Light red:     #E57373
+         Dark bg:       #111111
+         Dark surface:  #1a1a1a
+         Dark border:   #2a2a2a
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.6; color: #1a1a1a; background: #fff; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 32px; border-bottom: 1px solid #e8e8e4;
+      background: #fff; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { text-decoration: none; }
+    .nav-logo img { height: 68px; width: auto; display: block; mix-blend-mode: multiply; }
+    .nav-logo-text { display: none; font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: #1a1a1a; text-decoration: none; }
+    .nav-logo-text span { color: #C0392B; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: #555; text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: #1a1a1a; }
+    .nav-links a.active { color: #C0392B; }
+    .nav-cta {
+      background: #C0392B; color: #fff; border: none; border-radius: 6px;
+      padding: 9px 18px; font-size: 14px; font-weight: 600;
+      font-family: 'Barlow', sans-serif; cursor: pointer;
+      text-decoration: none; display: inline-block; transition: background 0.15s;
+    }
+    .nav-cta:hover { background: #a93226; }
+
+    .page-hero { background: #111; padding: 48px 32px 40px; }
+    .page-hero-inner { max-width: 640px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; color: #E57373; text-transform: uppercase; margin-bottom: 12px; }
+    .page-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 800; line-height: 1.05; color: #fff; margin-bottom: 12px; }
+    .page-hero h1 em { color: #E57373; font-style: normal; }
+    .page-hero p { font-size: 15px; color: #888; line-height: 1.6; max-width: 520px; }
+
+    .section { padding: 48px 32px; }
+    .section-alt { background: #f8f8f5; }
+    .section-narrow { max-width: 860px; margin: 0 auto; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 4px; color: #1a1a1a; }
+    .section-sub { font-size: 13px; color: #888; margin-bottom: 24px; line-height: 1.5; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .about-text p { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 16px; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-card { background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 22px; border-top: 3px solid #C0392B; }
+    .about-card-label { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: #C0392B; text-transform: uppercase; margin-bottom: 12px; }
+    .about-card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 2px; }
+    .about-card-role { font-size: 13px; color: #888; margin-bottom: 14px; }
+    .about-card-link { display: block; font-size: 13px; color: #C0392B; text-decoration: none; margin-bottom: 6px; }
+    .about-card-link:hover { text-decoration: underline; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 14px; }
+    .card { background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 20px; }
+    .card-dot { width: 8px; height: 8px; background: #C0392B; border-radius: 50%; margin-bottom: 10px; }
+    .card-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .card-text { font-size: 13px; color: #777; line-height: 1.55; }
+
+    .who-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .who-pill { background: #f4f4f0; border: 1px solid #e4e4de; border-radius: 24px; padding: 6px 16px; font-size: 13px; color: #555; }
+
+    .cta-block { background: #fdf0ef; border-radius: 12px; padding: 28px 32px; margin-top: 32px; }
+    .cta-block-title { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800; color: #7b1a11; margin-bottom: 8px; }
+    .cta-block-text { font-size: 14px; color: #a93226; line-height: 1.6; margin-bottom: 18px; max-width: 520px; }
+
+    .btn-primary {
+      background: #C0392B; color: #fff; border: none; border-radius: 7px;
+      padding: 12px 24px; font-size: 14px; font-weight: 600;
+      font-family: 'Barlow', sans-serif; cursor: pointer;
+      text-decoration: none; display: inline-block; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #a93226; }
+
+    .contact-form { max-width: 520px; }
+    .form-row { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .form-row input, .contact-form textarea {
+      width: 100%; flex: 1; min-width: 160px;
+      padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px;
+      font-family: 'Barlow', sans-serif; font-size: 14px; color: #1a1a1a;
+      background: #fff; transition: border-color 0.15s;
+    }
+    .form-row input:focus, .contact-form textarea:focus { outline: none; border-color: #C0392B; }
+    .contact-form textarea { resize: vertical; margin-bottom: 12px; }
+    .form-note { font-size: 12px; color: #999; margin-top: 8px; }
+    .form-note a { color: #C0392B; text-decoration: none; }
+
+    footer {
+      background: #f4f4f0; border-top: 1px solid #e8e8e4;
+      padding: 24px 32px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800; color: #1a1a1a; }
+    .footer-logo span { color: #C0392B; }
+    .footer-meta { font-size: 12px; color: #888; }
+    .footer-meta a { color: #C0392B; text-decoration: none; }
+
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e4;
+    padding: 8px 0 16px;
+    position: sticky;
+    top: 94px;
+    z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 15px;
+      font-weight: 500;
+      color: #555;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-bottom: 1px solid #f4f4f0;
+      transition: color 0.15s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #1a1a1a; }
+    .mobile-menu a.active { color: #C0392B; }
+    .mobile-menu .mobile-cta {
+      margin: 12px 20px 0;
+      background: #C0392B;
+      color: #fff;
+      border-radius: 6px;
+      padding: 11px 18px;
+      font-weight: 600;
+      text-align: center;
+      border-bottom: none;
+    }
+    .mobile-menu .mobile-cta:hover { background: #a93226; color: #fff; }
+
+    @media (max-width: 640px) {
+      nav { padding: 12px 16px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .page-hero { padding: 36px 20px 28px; }
+      .page-hero h1 { font-size: 34px; }
+      .section { padding: 36px 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 24px; }
+      .cta-block { padding: 22px 20px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 20px 16px; }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-    </nav>
 
-    <h1>About Us</h1>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Nebraska Boys Volleyball"
+           onerror="this.style.display='none'; document.querySelector('.nav-logo-text').style.display='block'">
+      <span class="nav-logo-text">Nebraska <span>Boys</span> Volleyball</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="opportunities.html">VB opportunities</a></li>
+      <li><a href="about.html" class="active">Get involved</a></li>
+    </ul>
+    <a href="https://forms.gle/QvEPisLkVAaxbDYGA" class="nav-cta" target="_blank" rel="noopener">Get involved</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="opportunities.html">VB opportunities</a>
+    <a href="about.html" class="active">Get involved</a>
+    <a href="https://forms.gle/QvEPisLkVAaxbDYGA" class="mobile-cta" target="_blank" rel="noopener">Get involved</a>
+  </div>
 
-    <p>Nebraska Volleyball Development Association was founded to answer a simple question: how many Nebraska boys never get an invitation to play volleyball?</p>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="hero-eyebrow">Get involved</div>
+      <h1>Help us grow<br><em>the game.</em></h1>
+      <p>NBV runs on the support of players, parents, coaches, and community sponsors across Nebraska. Every connection helps.</p>
+    </div>
+  </section>
 
-    <p>We exist to make sure more kids get that invitation. Our traveling clinic series brings structured, beginner-friendly programming to communities across the state.</p>
+  <section class="section">
+    <div class="section-narrow">
+      <div class="section-title">Our mission</div>
+      <p class="section-sub">Why we do this</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Nebraska Volleyball Development Association was founded to answer a simple question: how many Nebraska boys never get an invitation to play volleyball?</p>
+          <p>Boys volleyball is one of the fastest-growing sports in the country. Interest in Nebraska grows every year. But access isn't equal — not every community has a club, a coach, or even a gym that's open to beginners.</p>
+          <p>NBV exists to close that gap. We're an independent nonprofit — no club affiliation, no tryouts. Our traveling clinic series, open gyms, and jamboree showcase events bring structured, beginner-friendly programming directly to communities across the state.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-label">Founder</div>
+          <div class="about-card-name">Matthew Tweedy</div>
+          <div class="about-card-role">Executive Director, NVDA</div>
+          <a href="mailto:matthew@nebraskavolleyballdevelopment.org" class="about-card-link">✉️ matthew@nebraskavolleyballdevelopment.org</a>
+          <a href="https://www.instagram.com/NEBoysVolleyball" class="about-card-link" target="_blank" rel="noopener">📸 @NEBoysVolleyball</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <p>NBV is an independent nonprofit. We're not affiliated with any club or regional structure. Our goal is simple: get more boys in the gym.</p>
+  <section class="section section-alt">
+    <div class="section-narrow">
+      <div class="section-title">Ways to help</div>
+      <p class="section-sub">There are a lot of ways to make a difference — pick what works for you.</p>
+      <div class="card-grid">
+        <div class="card"><div class="card-dot"></div><div class="card-title">Sponsor an event</div><div class="card-text">Cover clinic or jamboree costs so players never see a fee at the door.</div></div>
+        <div class="card"><div class="card-dot"></div><div class="card-title">Donate equipment</div><div class="card-text">Volleyballs, nets, and training gear go directly to player development.</div></div>
+        <div class="card"><div class="card-dot"></div><div class="card-title">Volunteer</div><div class="card-text">Help run events, coach drills, take photos, or handle logistics on game day.</div></div>
+        <div class="card"><div class="card-dot"></div><div class="card-title">Become a supporter</div><div class="card-text">Join as a founding individual supporter or set up a voluntary family membership.</div></div>
+      </div>
 
-    <p><strong>Founder:</strong> Matthew Tweedy, Executive Director<br>
-    <strong>Email:</strong> <a href="mailto:matthew@nebraskavolleyballdevelopment.org">matthew@nebraskavolleyballdevelopment.org</a></p>
+      <div style="margin-top: 36px;">
+        <div class="section-title">Who we're looking for</div>
+        <p class="section-sub">We want to build a statewide network of everyone who cares about this sport.</p>
+        <div class="who-row">
+          <span class="who-pill">Players</span>
+          <span class="who-pill">Parents</span>
+          <span class="who-pill">Coaches</span>
+          <span class="who-pill">Athletic directors</span>
+          <span class="who-pill">School staff</span>
+          <span class="who-pill">Volunteers</span>
+          <span class="who-pill">Business sponsors</span>
+          <span class="who-pill">Community supporters</span>
+          <span class="who-pill">Gym owners</span>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-block-title">Ready to get involved?</div>
+        <p class="cta-block-text">Fill out our interest form and we'll reach out with event info, volunteer opportunities, and ways to support the program. Takes about 90 seconds.</p>
+        <a href="https://forms.gle/QvEPisLkVAaxbDYGA" class="btn-primary" target="_blank" rel="noopener">Fill out the interest form</a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <footer>
+    <div class="footer-logo">Nebraska <span>Boys</span> Volleyball</div>
+    <div class="footer-meta">
+      Nebraska Volleyball Development Association &middot; 501(c)(3) nonprofit &middot;
+      <a href="mailto:info@nebraskavolleyballdevelopment.org">info@nebraskavolleyballdevelopment.org</a>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
 </body>
 </html>
